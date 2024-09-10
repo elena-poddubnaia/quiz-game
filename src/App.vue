@@ -4,8 +4,6 @@ import { ref } from 'vue'
 const picked = ref('')
 const pickedSecond = ref('')
 const pickedThree = ref('')
-const options = [1, 2, 3, 4]
-const correctAnswer = 2
 
 const questions = [
   {
@@ -22,11 +20,11 @@ const questions = [
       <h1>{{ question.question }}</h1>
 
       <div v-for="option in question.options" :key="option">
-        <input type="radio" :value="option" v-model="pickedThree" />
+        <input type="radio" :value="option" v-model="picked" />
         <label>{{ option }}</label>
       </div>
 
-      {{ pickedThree === '' ? '' : pickedThree === question.answer ? 'correct' : 'wrong' }}
+      {{ picked === '' ? '' : picked === question.answer ? 'correct' : 'wrong' }}
       <br />
     </div>
 
