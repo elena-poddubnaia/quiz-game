@@ -1,15 +1,21 @@
 <script setup>
 import { ref } from 'vue'
 
-const picked = ref('')
+// const picked = ref('')
 const pickedSecond = ref('')
-const pickedThree = ref('')
 
 const questions = [
   {
     question: 'Is it first question?',
     options: ['yes', 'no'],
-    answer: 'yes'
+    answer: 'yes',
+    picked: ref('')
+  },
+  {
+    question: 'Is it second question?',
+    options: ['yes', 'no'],
+    answer: 'yes',
+    picked: ref('')
   }
 ]
 </script>
@@ -20,11 +26,11 @@ const questions = [
       <h1>{{ question.question }}</h1>
 
       <div v-for="option in question.options" :key="option">
-        <input type="radio" :value="option" v-model="picked" />
+        <input type="radio" :value="option" v-model="question.picked" />
         <label>{{ option }}</label>
       </div>
 
-      {{ picked === '' ? '' : picked === question.answer ? 'correct' : 'wrong' }}
+      {{ question.picked === '' ? '' : question.picked === question.answer ? 'correct' : 'wrong' }}
       <br />
     </div>
 
