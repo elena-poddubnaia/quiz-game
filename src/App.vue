@@ -3,6 +3,9 @@ import { ref } from 'vue'
 
 const picked = ref('')
 const pickedSecond = ref('')
+const pickedThree = ref('')
+const options = [1, 2, 3, 4]
+const correctAnswer = 2
 </script>
 
 <template>
@@ -19,7 +22,7 @@ const pickedSecond = ref('')
 
     {{ picked === '' ? '' : picked === 'yes' ? 'correct' : 'wrong' }}
 
-    <h1>Is it first question?</h1>
+    <h1>Is it second question?</h1>
 
     <input type="radio" value="yes" id="oneSecond" v-model="pickedSecond" />
     <label for="oneSecond">yes</label>
@@ -30,6 +33,14 @@ const pickedSecond = ref('')
     <br />
 
     {{ pickedSecond === '' ? '' : pickedSecond === 'yes' ? 'correct' : 'wrong' }}
+    <br />
+
+    <div v-for="option in options" :key="option">
+      <input type="radio" :value="option" v-model="pickedThree" />
+      <label>{{ option }}</label>
+    </div>
+
+    {{ pickedThree === '' ? '' : pickedThree === correctAnswer ? 'correct' : 'wrong' }}
   </main>
 </template>
 
