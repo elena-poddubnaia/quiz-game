@@ -1,23 +1,20 @@
 <script setup>
 import { ref } from 'vue'
 
-// const picked = ref('')
-const pickedSecond = ref('')
-
-const questions = [
+const questions = ref([
   {
     question: 'Is it first question?',
     options: ['yes', 'no'],
     answer: 'yes',
-    picked: ref('')
+    picked: ''
   },
   {
     question: 'Is it second question?',
     options: ['yes', 'no'],
     answer: 'yes',
-    picked: ref('')
+    picked: ''
   }
-]
+])
 </script>
 
 <template>
@@ -31,21 +28,9 @@ const questions = [
       </div>
 
       {{ question.picked === '' ? '' : question.picked === question.answer ? 'correct' : 'wrong' }}
+
       <br />
     </div>
-
-    <h1>Is it second question?</h1>
-
-    <input type="radio" value="yes" id="oneSecond" v-model="pickedSecond" />
-    <label for="oneSecond">yes</label>
-    <br />
-
-    <input type="radio" value="no" id="twoSecond" v-model="pickedSecond" />
-    <label for="twoSecond">no</label>
-    <br />
-
-    {{ pickedSecond === '' ? '' : pickedSecond === 'yes' ? 'correct' : 'wrong' }}
-    <br />
   </main>
 </template>
 
