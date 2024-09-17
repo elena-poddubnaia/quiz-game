@@ -50,7 +50,9 @@ function onSubmit() {
       <br />
     </div>
 
-    <button @click="onSubmit">Submit</button>
+    <button @click="onSubmit" :disabled="questions.filter((i) => i.picked === '').length != 0">
+      Submit
+    </button>
   </main>
 </template>
 
