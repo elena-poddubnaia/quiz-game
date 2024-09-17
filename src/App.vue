@@ -35,7 +35,7 @@ function onSubmit() {
       <h1>{{ question.question }}</h1>
 
       <div v-for="option in question.options" :key="option">
-        <input type="radio" :value="option" v-model="question.picked" />
+        <input type="radio" :value="option" v-model="question.picked" :disabled="showResults" />
         <label>{{ option }}</label>
       </div>
 
