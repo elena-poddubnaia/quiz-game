@@ -13,8 +13,20 @@ const questions = ref([
     options: ['yes', 'no'],
     answer: 'yes',
     picked: ''
+  },
+  {
+    question: 'Is it second question?',
+    options: ['yes', 'no', 'maybe', "don't want to answer"],
+    answer: 'yes',
+    picked: ''
   }
 ])
+
+const showResults = ref(false)
+
+function onSubmit() {
+  showResults.value = true
+}
 </script>
 
 <template>
@@ -27,10 +39,18 @@ const questions = ref([
         <label>{{ option }}</label>
       </div>
 
-      {{ question.picked === '' ? '' : question.picked === question.answer ? 'correct' : 'wrong' }}
+      {{
+        question.picked === '' || !showResults
+          ? ''
+          : question.picked === question.answer
+            ? 'correct'
+            : 'wrong'
+      }}
 
       <br />
     </div>
+
+    <button @click="onSubmit">Submit</button>
   </main>
 </template>
 
