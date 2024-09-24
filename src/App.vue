@@ -1,32 +1,39 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
-const questions = ref([
-  {
-    question: 'Is it first question?',
-    options: ['yes', 'no'],
-    answer: 'yes',
-    picked: ''
-  },
-  {
-    question: 'Is it second question?',
-    options: ['yes', 'no'],
-    answer: 'yes',
-    picked: ''
-  },
-  {
-    question: 'Is it second question?',
-    options: ['yes', 'no', 'maybe', "don't want to answer"],
-    answer: 'yes',
-    picked: ''
-  }
-])
+const store = useStore()
+store.commit('logState')
+
+// const questions = ref([
+//   {
+//     question: 'Is it first question?',
+//     options: ['yes', 'no'],
+//     answer: 'yes',
+//     picked: ''
+//   },
+//   {
+//     question: 'Is it second question?',
+//     options: ['yes', 'no'],
+//     answer: 'yes',
+//     picked: ''
+//   },
+//   {
+//     question: 'Is it second question?',
+//     options: ['yes', 'no', 'maybe', "don't want to answer"],
+//     answer: 'yes',
+//     picked: ''
+//   }
+// ])
 
 const showResults = ref(false)
 
 function onSubmit() {
   showResults.value = true
 }
+
+const questions = computed(() => store.state.questions)
+// mapState(['questions'])
 </script>
 
 <template>
@@ -35,7 +42,12 @@ function onSubmit() {
       <h1>{{ question.question }}</h1>
 
       <div v-for="option in question.options" :key="option">
-        <input type="radio" :value="option" v-model="question.picked" :disabled="showResults" />
+        <input
+          type="radio"
+          :checked="option === question.picked"
+          :disabled="showResults"
+          @change="() => store.commit('pick')"
+        />
         <label>{{ option }}</label>
       </div>
 
