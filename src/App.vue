@@ -46,7 +46,7 @@ const questions = computed(() => store.state.questions)
           type="radio"
           :checked="option === question.picked"
           :disabled="showResults"
-          @change="() => store.commit('pick')"
+          @change="() => store.commit('pick', { index, option })"
         />
         <label>{{ option }}</label>
       </div>

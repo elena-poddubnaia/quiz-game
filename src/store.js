@@ -29,9 +29,8 @@ export const store = createStore({
     logState() {
       console.log(this.state)
     },
-    pick(state) {
-      console.log(state)
-      state.questions = []
+    pick(state, { index, option }) {
+      store.state.questions[index].picked = option
     }
   }
 })
