@@ -30,7 +30,7 @@ export const store = createStore({
       console.log(this.state)
     },
     pick(state, { index, option }) {
-      store.state.questions[index].picked = option
+      state.questions[index].picked = option
     }
   }
 })
