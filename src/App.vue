@@ -3,28 +3,6 @@ import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
-store.commit('logState')
-
-// const questions = ref([
-//   {
-//     question: 'Is it first question?',
-//     options: ['yes', 'no'],
-//     answer: 'yes',
-//     picked: ''
-//   },
-//   {
-//     question: 'Is it second question?',
-//     options: ['yes', 'no'],
-//     answer: 'yes',
-//     picked: ''
-//   },
-//   {
-//     question: 'Is it second question?',
-//     options: ['yes', 'no', 'maybe', "don't want to answer"],
-//     answer: 'yes',
-//     picked: ''
-//   }
-// ])
 
 const showResults = ref(false)
 
@@ -33,7 +11,6 @@ function onSubmit() {
 }
 
 const questions = computed(() => store.state.questions)
-// mapState(['questions'])
 </script>
 
 <template>

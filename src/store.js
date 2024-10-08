@@ -26,9 +26,6 @@ export const store = createStore({
     }
   },
   mutations: {
-    logState() {
-      console.log(this.state)
-    },
     pick(state, { index, option }) {
       state.questions[index].picked = option
     }
