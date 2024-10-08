@@ -11,6 +11,7 @@ function onSubmit() {
 }
 
 const questions = computed(() => store.state.questions)
+const hasRightAnswer = (question) => question.picked === question.answer
 </script>
 
 <template>
@@ -29,11 +30,7 @@ const questions = computed(() => store.state.questions)
       </div>
 
       {{
-        question.picked === '' || !showResults
-          ? ''
-          : question.picked === question.answer
-            ? 'correct'
-            : 'wrong'
+        question.picked === '' || !showResults ? '' : hasRightAnswer(question) ? 'correct' : 'wrong'
       }}
 
       <br />
