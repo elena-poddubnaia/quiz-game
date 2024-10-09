@@ -10,8 +10,7 @@ function onSubmit() {
   showResults.value = true
 }
 
-const questions = computed(() => store.state.questions)
-const hasRightAnswer = (question) => question.picked === question.answer
+const questions = computed(() => store.getters.questions2)
 </script>
 
 <template>
@@ -30,7 +29,7 @@ const hasRightAnswer = (question) => question.picked === question.answer
       </div>
 
       {{
-        question.picked === '' || !showResults ? '' : hasRightAnswer(question) ? 'correct' : 'wrong'
+        question.picked === '' || !showResults ? '' : question.hasRightAnswer ? 'correct' : 'wrong'
       }}
 
       <br />

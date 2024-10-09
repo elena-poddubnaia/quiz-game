@@ -1,5 +1,7 @@
 import { createStore } from 'vuex'
 
+export const hasRightAnswer = (question) => question.picked === question.answer
+
 export const store = createStore({
   state() {
     return {
@@ -28,6 +30,11 @@ export const store = createStore({
   mutations: {
     pick(state, { index, option }) {
       state.questions[index].picked = option
+    }
+  },
+  getters: {
+    questions2(state) {
+      return state.questions.map((q) => ({ hasRightAnswer: hasRightAnswer(q), ...q }))
     }
   }
 })
