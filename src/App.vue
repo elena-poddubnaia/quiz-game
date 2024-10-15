@@ -1,9 +1,11 @@
 <script setup>
 import { ref, computed } from 'vue'
 import PlayGame from './PlayGame.vue'
+import NewGame from './NewGame.vue'
 
 const routes = {
-  '/': PlayGame
+  '/': PlayGame,
+  '/new': NewGame
 }
 
 const currentPath = ref(window.location.hash)
