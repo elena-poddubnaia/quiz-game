@@ -5,11 +5,12 @@ import { ref } from 'vue'
 const store = useStore()
 const questionTitle = ref('')
 const option = ref('')
+const options = []
 
 const handleOnClick = () => {
   store.commit('addQuestion', {
     question: questionTitle,
-    options: [option],
+    options: options,
     answer: 'no',
     picked: ''
   })
@@ -24,6 +25,8 @@ const handleOnClick = () => {
 
   <p>Options:</p>
   <input v-model="option" />
+  <button @click="options.push(option)">Add option</button>
 
+  <br />
   <button @click="handleOnClick">Add question</button>
 </template>
