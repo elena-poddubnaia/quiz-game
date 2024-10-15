@@ -7,5 +7,16 @@ const store = useStore()
 <template>
   New Game!
 
-  <button @click="store.commit('addQuestion')">Add question</button>
+  <button
+    @click="
+      store.commit('addQuestion', {
+        question: 'Hello world?',
+        options: ['yes', 'no'],
+        answer: 'no',
+        picked: ''
+      })
+    "
+  >
+    Add question
+  </button>
 </template>

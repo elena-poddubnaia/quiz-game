@@ -31,13 +31,8 @@ export const store = createStore({
     pick(state, { index, option }) {
       state.questions[index].picked = option
     },
-    addQuestion(state) {
-      state.questions.push({
-        question: 'Hello world?',
-        options: ['yes', 'no'],
-        answer: 'no',
-        picked: ''
-      })
+    addQuestion(state, question) {
+      state.questions.push(question)
     }
   },
   getters: {
