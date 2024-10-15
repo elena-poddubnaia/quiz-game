@@ -5,13 +5,14 @@ import { ref } from 'vue'
 const store = useStore()
 const questionTitle = ref('')
 const option = ref('')
+const answer = ref('')
 const options = []
 
 const handleOnClick = () => {
   store.commit('addQuestion', {
     question: questionTitle,
     options: options,
-    answer: 'no',
+    answer: answer,
     picked: ''
   })
   window.location.hash = '#/'
@@ -26,6 +27,9 @@ const handleOnClick = () => {
   <p>Options:</p>
   <input v-model="option" />
   <button @click="options.push(option)">Add option</button>
+
+  <p>Answer:</p>
+  <input v-model="answer" />
 
   <br />
   <button @click="handleOnClick">Add question</button>
