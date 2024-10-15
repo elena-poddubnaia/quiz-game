@@ -9,11 +9,16 @@ We want to break the development into three steps: Vue.js, TypeScript, and unit 
 - [x] Add dynamic questions
 - [x] Consider to add state management with vuex
 - [x] Make vuex work: remove binding for options, use mutation instead 
-- [ ] Learn about routing and how we can use it
-- [ ] Discuss hasRightAnswer function implementation
+- [x] Learn about routing and how we can use it
+- [x] Discuss hasRightAnswer function implementation
+- [x] Add test
+- [ ] Use Vitest for component testing
+      
       
 
 ## Tips 
 After adding new code, first think about what you expect to happen. Then, open the browser and check if everything works as you expected (or not).
 
 Read documentation.
+
+Notice and optimize repeated tasks (commits, testing).
