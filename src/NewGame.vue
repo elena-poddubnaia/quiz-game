@@ -3,16 +3,16 @@ import { useStore } from 'vuex'
 import { ref } from 'vue'
 
 const store = useStore()
-const questionTitle = ref('')
+const question = ref('')
 const option = ref('')
 const answer = ref('')
 const options = []
 
 const handleOnClick = () => {
   store.commit('addQuestion', {
-    question: questionTitle,
-    options: options,
-    answer: answer,
+    question,
+    options,
+    answer,
     picked: ''
   })
   window.location.hash = '#/'
@@ -22,7 +22,7 @@ const handleOnClick = () => {
 <template>
   New Game!
   <p>Question:</p>
-  <input v-model="questionTitle" />
+  <input v-model="question" />
 
   <p>Options:</p>
   <input v-model="option" />
