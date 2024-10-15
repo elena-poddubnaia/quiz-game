@@ -30,6 +30,14 @@ export const store = createStore({
   mutations: {
     pick(state, { index, option }) {
       state.questions[index].picked = option
+    },
+    addQuestion(state) {
+      state.questions.push({
+        question: 'Hello world?',
+        options: ['yes', 'no'],
+        answer: 'no',
+        picked: ''
+      })
     }
   },
   getters: {
