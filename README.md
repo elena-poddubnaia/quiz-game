@@ -12,7 +12,8 @@ We want to break the development into three steps: Vue.js, TypeScript, and unit 
 - [x] Learn about routing and how we can use it
 - [x] Discuss hasRightAnswer function implementation
 - [x] Add test
-- [ ] Use Vitest for component testing
+- [x] Use Vitest for component testing
+- [ ] add to makeStore function something like empty questions: [] (To use it for testing, no copy past needed, Chris said)
       
       
 
