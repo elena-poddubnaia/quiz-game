@@ -21,8 +21,8 @@ const handleOnClick = () => {
 
 <template>
   New Game!
-  <p>Question:</p>
-  <input v-model="question" />
+  <label for="question_input">Question:</label>
+  <input id="question_input" v-model="question" />
 
   <p>Options:</p>
   <input v-model="option" />
