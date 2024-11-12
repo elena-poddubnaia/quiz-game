@@ -24,12 +24,13 @@ const handleOnClick = () => {
   <label for="question_input">Question:</label>
   <input id="question_input" v-model="question" />
 
-  <p>Options:</p>
-  <input v-model="option" />
+  <label for="options_input">Options:</label>
+  <input id="options_input" v-model="option" />
+
   <button @click="options.push(option)">Add option</button>
 
-  <p>Answer:</p>
-  <input v-model="answer" />
+  <label for="answer_input">Answer:</label>
+  <input id="answer_input" v-model="answer" />
 
   <br />
   <button @click="handleOnClick">Add question</button>
