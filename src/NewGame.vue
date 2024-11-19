@@ -23,11 +23,13 @@ const handleOnClick = () => {
   New Game!
   <label for="question_input">Question:</label>
   <input id="question_input" v-model="question" />
+  <br />
 
   <label for="options_input">Options:</label>
   <input id="options_input" v-model="option" />
 
   <button @click="options.push(option)">Add option</button>
+  <br />
 
   <label for="answer_input">Answer:</label>
   <input id="answer_input" v-model="answer" />
