@@ -19,13 +19,14 @@ const questions = computed(() => store.getters.questions2)
       <h1>{{ question.question }}</h1>
 
       <div v-for="option in question.options" :key="option">
-        <input
-          type="radio"
-          :checked="option === question.picked"
-          :disabled="showResults"
-          @change="() => store.commit('pick', { index, option })"
-        />
-        <label>{{ option }}</label>
+        <label>
+          <input
+            type="radio"
+            :checked="option === question.picked"
+            :disabled="showResults"
+            @change="() => store.commit('pick', { index, option })"
+          />{{ option }}</label
+        >
       </div>
 
       {{
