@@ -2,30 +2,11 @@ import { createStore } from 'vuex'
 
 export const hasRightAnswer = (question) => question.picked === question.answer
 
-export const makeStore = () =>
+export const makeStore = (questions = []) =>
   createStore({
     state() {
       return {
-        questions: [
-          {
-            question: 'Is it first question?',
-            options: ['yes', 'no'],
-            answer: 'yes',
-            picked: ''
-          },
-          {
-            question: 'Is it second question?',
-            options: ['yes', 'no'],
-            answer: 'yes',
-            picked: ''
-          },
-          {
-            question: 'Is it second question?',
-            options: ['yes', 'no', 'maybe', "don't want to answer"],
-            answer: 'yes',
-            picked: ''
-          }
-        ]
+        questions: questions
       }
     },
     mutations: {
@@ -43,4 +24,25 @@ export const makeStore = () =>
     }
   })
 
-export const store = makeStore()
+const defaultQuestions = [
+  {
+    question: 'Is it first question?',
+    options: ['yes', 'no'],
+    answer: 'yes',
+    picked: ''
+  },
+  {
+    question: 'Is it second question?',
+    options: ['yes', 'no'],
+    answer: 'yes',
+    picked: ''
+  },
+  {
+    question: 'Is it second question?',
+    options: ['yes', 'no', 'maybe', "don't want to answer"],
+    answer: 'yes',
+    picked: ''
+  }
+]
+
+export const store = makeStore(defaultQuestions)

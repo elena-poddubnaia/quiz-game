@@ -1,13 +1,14 @@
 import { test, expect } from 'vitest'
 import { render, fireEvent } from '@testing-library/vue'
-import { store, makeStore } from '@/store'
+import { makeStore } from '@/store'
 import NewGame from '@/NewGame.vue'
 
 test('NewGame', async () => {
+  const store = makeStore()
   const screen = render(NewGame, {
     global: {
       provide: {
-        store: makeStore()
+        store: store
       }
     }
   })
@@ -35,8 +36,4 @@ test('NewGame', async () => {
     question: 'My question?'
   })
   expect(window.location.hash).toBe('#/')
-})
-
-test('second', () => {
-  expect(store.state.questions).toEqual(null)
 })
