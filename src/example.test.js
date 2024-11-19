@@ -59,6 +59,8 @@ test('PlayGame', async () => {
   await fireEvent.click(question)
 
   const submitButton = screen.getByText('Submit')
+  expect(submitButton).toBeEnabled()
+
   await fireEvent.click(submitButton)
 
   const rightAnswers = screen.getAllByText('correct')
