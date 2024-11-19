@@ -25,10 +25,10 @@ Features for New Game page:
 - [ ] Try Tests go first approach
 - [ ] Enjoy
 
-Candidate for next meeting:
+Candidate for next month:
 - [ ] TypeScript
-- [ ] Link New Game Page with Play Game
-- [ ]  
+- [ ] Connect New Game Page with Play Game
+- [ ] Database query and API calls 
 
 ## Tips 
 After adding new code, first think about what you expect to happen. Then, open the browser and check if everything works as you expected (or not).
