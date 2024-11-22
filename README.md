@@ -36,3 +36,5 @@ Read documentation.
 
 Notice and optimize repeated tasks (commits, testing).
 
+When starting with unknown topic, break it down into tasks we need to figure out.
+
