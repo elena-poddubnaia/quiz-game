@@ -15,14 +15,13 @@ We want to break the development into three steps: Vue.js, TypeScript, and unit 
 - [x] Use Vitest for component testing
 - [x] Add to makeStore() function input parameter with default value to create empty store, or prepopulated store
 
-Features for New Game page:
+New Game page:
+- [ ] Try test first approach
 - [ ] Show options as they are added (on Add option button click, like list of tags)
 - [ ] Clear input field after adding an option
 - [ ] Add possability to remove option
 - [ ] Enable selecting one option as correct answer
 - [ ] Implement form validation(fields are full field)
-
-- [ ] Try Tests go first approach
 - [ ] Enjoy
 
 Candidate for next month:
