@@ -24,7 +24,7 @@ New Game page:
 - [ ] Implement form validation(fields are full field)
 - [ ] Enjoy
 
-Candidate for next month:
+Goals for the Brave:
 - [ ] TypeScript
 - [ ] Connect New Game Page with Play Game
 - [ ] Database query and API calls 
