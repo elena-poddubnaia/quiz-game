@@ -24,6 +24,8 @@ test('NewGame', async () => {
   await fireEvent.update(optionsInput, 'second')
   await fireEvent.click(addOptionButton)
 
+  expect(optionsInput.value).toEqual('')
+
   const answerInput = screen.getByLabelText('Answer:')
   await fireEvent.update(answerInput, 'first')
 

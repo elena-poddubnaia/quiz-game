@@ -17,6 +17,11 @@ const handleOnClick = () => {
   })
   window.location.hash = '#/'
 }
+
+const addOption = () => {
+  options.push(option.value)
+  option.value = ''
+}
 </script>
 
 <template>
@@ -28,7 +33,7 @@ const handleOnClick = () => {
   <label for="options_input">Options:</label>
   <input id="options_input" v-model="option" />
 
-  <button @click="options.push(option)">Add option</button>
+  <button @click="addOption">Add option</button>
   <br />
 
   <label for="answer_input">Answer:</label>
