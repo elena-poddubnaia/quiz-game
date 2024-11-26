@@ -33,13 +33,13 @@ Goals for Braves:
 - [ ] Database query and API calls 
 
 ## Tips 
-After adding new code, first think about what you expect to happen. Then, open the browser and check if everything works as you expected (or not).
+- After adding new code, first think about what you expect to happen. Then, open the browser and check if everything works as you expected (or not).
 
-Read documentation.
+- Read documentation.
 
-Notice and optimize repeated tasks (commits, testing).
+- Notice and optimize repeated tasks (commits, testing).
 
-When starting with unknown topic, break it down into tasks we need to figure out.
+- When starting with unknown topic, break it down into tasks we need to figure out.
 
 ## Reading list
 - [ ] [Page Object](https://martinfowler.com/bliki/PageObject.html) 
