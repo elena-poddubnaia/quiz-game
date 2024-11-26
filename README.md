@@ -16,13 +16,16 @@ We want to break the development into three steps: Vue.js, TypeScript, and unit 
 - [x] Add to makeStore() function input parameter with default value to create empty store, or prepopulated store
 
 New Game page:
-- [ ] Try test first approach
-- [ ] Show options as they are added (on Add option button click, like list of tags)
-- [ ] Clear input field after adding an option
+- [x] Try test first approach
+- [x] Show options as they are added (on Add option button click, like list of tags)
+- [x] Clear input field after adding an option
+- [ ] HW: extract test step to higher level, name function as what it means to user, navigate through the test, read Page Object
 - [ ] Add possability to remove option
 - [ ] Enable selecting one option as correct answer
 - [ ] Implement form validation(fields are full field)
 - [ ] Enjoy
+
+
 
 Goals for Braves:
 - [ ] TypeScript
@@ -37,4 +40,7 @@ Read documentation.
 Notice and optimize repeated tasks (commits, testing).
 
 When starting with unknown topic, break it down into tasks we need to figure out.
+
+## Reading list
+- [ ] [Page Object](https://martinfowler.com/bliki/PageObject.html) 
 
