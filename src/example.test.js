@@ -15,23 +15,18 @@ test('NewGame', async () => {
   })
   const questionInput = screen.getByLabelText('Question:')
   await fireEvent.update(questionInput, 'My question?')
-  let options = screen.queryAllByTestId('option')
-  expect(options.length).toBe(0)
+  expectOptionsOnScreen(screen, [])
 
-  const optionsInput = screen.getByLabelText('Options:')
+  const optionsInput = screen.getByLabelText('Options:') //extract to hight level
   await fireEvent.update(optionsInput, 'first')
-  const addOptionButton = screen.getByText('Add option')
-  await fireEvent.click(addOptionButton)
+  await clickAddOption(screen)
 
   await fireEvent.update(optionsInput, 'second')
-  await fireEvent.click(addOptionButton)
+  await clickAddOption(screen)
 
-  expect(optionsInput.value).toEqual('')
+  expectOptionFieldToBeClear(optionsInput)
 
-  options = screen.getAllByTestId('option')
-  expect(options.length).toBe(2)
-  expect(options[0].textContent).toEqual('first')
-  expect(options[1].textContent).toEqual('second')
+  expectOptionsOnScreen(screen, ['first', 'second'])
 
   const answerInput = screen.getByLabelText('Answer:')
   await fireEvent.update(answerInput, 'first')
@@ -39,6 +34,7 @@ test('NewGame', async () => {
   const button = screen.getByText('Add question')
   await fireEvent.click(button)
 
+  //extract to hight level what it ments to user, mavigated
   expect(store.state.questions.at(-1)).toEqual({
     answer: 'first',
     options: ['first', 'second'],
@@ -75,3 +71,16 @@ test('PlayGame', async () => {
   const rightAnswers = screen.getAllByText('correct')
   expect(rightAnswers.length).toEqual(1)
 })
+
+function expectOptionsOnScreen(screen, expectedOptions) {
+  const options = screen.queryAllByTestId('option')
+  expect(options.map((o) => o.textContent)).toEqual(expectedOptions)
+}
+
+async function clickAddOption(screen) {
+  await fireEvent.click(screen.getByText('Add option'))
+}
+
+function expectOptionFieldToBeClear(optionsInput) {
+  expect(optionsInput.value).toEqual('')
+}
