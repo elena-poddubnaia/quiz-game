@@ -15,6 +15,8 @@ test('NewGame', async () => {
   })
   const questionInput = screen.getByLabelText('Question:')
   await fireEvent.update(questionInput, 'My question?')
+  let options = screen.queryAllByTestId('option')
+  expect(options.length).toBe(0)
 
   const optionsInput = screen.getByLabelText('Options:')
   await fireEvent.update(optionsInput, 'first')
@@ -25,6 +27,11 @@ test('NewGame', async () => {
   await fireEvent.click(addOptionButton)
 
   expect(optionsInput.value).toEqual('')
+
+  options = screen.getAllByTestId('option')
+  expect(options.length).toBe(2)
+  expect(options[0].textContent).toEqual('first')
+  expect(options[1].textContent).toEqual('second')
 
   const answerInput = screen.getByLabelText('Answer:')
   await fireEvent.update(answerInput, 'first')

@@ -6,7 +6,7 @@ const store = useStore()
 const question = ref('')
 const option = ref('')
 const answer = ref('')
-const options = []
+const options = ref([])
 
 const handleOnClick = () => {
   store.commit('addQuestion', {
@@ -19,7 +19,7 @@ const handleOnClick = () => {
 }
 
 const addOption = () => {
-  options.push(option.value)
+  options.value.push(option.value)
   option.value = ''
 }
 </script>
@@ -35,6 +35,10 @@ const addOption = () => {
 
   <button @click="addOption">Add option</button>
   <br />
+
+  <ul>
+    <li v-for="option in options" :key="option" data-testid="option">{{ option }}</li>
+  </ul>
 
   <label for="answer_input">Answer:</label>
   <input id="answer_input" v-model="answer" />
