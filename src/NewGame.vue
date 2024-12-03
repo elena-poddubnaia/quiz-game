@@ -36,12 +36,9 @@ const addOption = () => {
   <button @click="addOption">Add option</button>
   <br />
 
-  <ul>
-    <li v-for="option in options" :key="option" data-testid="option">{{ option }}</li>
-  </ul>
-
-  <label for="answer_input">Answer:</label>
-  <input id="answer_input" v-model="answer" />
+  <label v-for="option in options" :key="option" data-testid="option">
+    <input type="radio" v-model="answer" :value="option" />{{ option }}
+  </label>
 
   <br />
   <button @click="handleOnClick">Add question</button>

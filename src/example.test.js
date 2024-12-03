@@ -5,51 +5,38 @@ import NewGame from '@/NewGame.vue'
 import PlayGame from './PlayGame.vue'
 
 test('NewGame', async () => {
-  const store = makeStore()
-  const screen = render(NewGame, {
-    global: {
-      provide: {
-        store: store
-      }
-    }
-  })
-  const questionInput = screen.getByLabelText('Question:')
-  await fireEvent.update(questionInput, 'My question?')
-  expectOptionsOnScreen(screen, [])
+  const page = new NewGamePage()
 
-  const optionsInput = screen.getByLabelText('Options:') //extract to hight level
-  await fireEvent.update(optionsInput, 'first')
-  await clickAddOption(screen)
+  await page.addQuestion('My question?')
+  page.expectOptionsOnScreen([])
 
-  await fireEvent.update(optionsInput, 'second')
-  await clickAddOption(screen)
+  await addOption(page.screen, 'first') //call objects method
 
-  expectOptionFieldToBeClear(optionsInput)
+  await addOption(page.screen, 'second')
 
-  expectOptionsOnScreen(screen, ['first', 'second'])
+  page.expectOptionsOnScreen(['first', 'second'])
 
-  const answerInput = screen.getByLabelText('Answer:')
-  await fireEvent.update(answerInput, 'first')
+  await addCorrectAnswer(page.screen, 'first')
 
-  const button = screen.getByText('Add question')
-  await fireEvent.click(button)
+  await clickAddQuestion(page.screen)
 
-  //extract to hight level what it ments to user, mavigated
-  expect(store.state.questions.at(-1)).toEqual({
+  expect(lastQuestion(page.store)).toEqual({
     answer: 'first',
     options: ['first', 'second'],
     picked: '',
     question: 'My question?'
   })
-  expect(window.location.hash).toBe('#/')
+
+  expectRedirectedToHomePage()
 })
 
 test('PlayGame', async () => {
+  const correctAnswer = 'yes'
   const store = makeStore([
     {
       question: 'Is it first question?',
       options: ['yes', 'no'],
-      answer: 'yes',
+      answer: correctAnswer,
       picked: ''
     }
   ])
@@ -60,27 +47,83 @@ test('PlayGame', async () => {
       }
     }
   })
-  const question = screen.getByLabelText('yes')
-  await fireEvent.click(question)
+  await selectAnswer(screen, correctAnswer)
 
+  await submitAnswers(screen)
+
+  expectAnswerIsCorrect(screen)
+})
+
+function expectAnswerIsCorrect(screen) {
+  const rightAnswers = screen.getAllByText('correct')
+  expect(rightAnswers.length).toEqual(1)
+}
+
+async function submitAnswers(screen) {
   const submitButton = screen.getByText('Submit')
   expect(submitButton).toBeEnabled()
 
   await fireEvent.click(submitButton)
+}
 
-  const rightAnswers = screen.getAllByText('correct')
-  expect(rightAnswers.length).toEqual(1)
-})
+async function selectAnswer(screen, answer) {
+  const question = screen.getByLabelText(answer)
+  await fireEvent.click(question)
+}
 
-function expectOptionsOnScreen(screen, expectedOptions) {
-  const options = screen.queryAllByTestId('option')
-  expect(options.map((o) => o.textContent)).toEqual(expectedOptions)
+function expectRedirectedToHomePage() {
+  expect(window.location.hash).toBe('#/')
+}
+
+function lastQuestion(store) {
+  return store.state.questions.at(-1)
+}
+
+async function clickAddQuestion(screen) {
+  const button = screen.getByText('Add question')
+  await fireEvent.click(button)
+}
+
+async function addCorrectAnswer(screen, answer) {
+  const answerInput = screen.getByLabelText(answer)
+  await fireEvent.click(answerInput)
+}
+
+async function addOption(screen, option) {
+  const optionsInput = screen.getByLabelText('Options:')
+  await fireEvent.update(optionsInput, option)
+  await clickAddOption(screen)
+  expectOptionFieldToBeClear(screen)
 }
 
 async function clickAddOption(screen) {
   await fireEvent.click(screen.getByText('Add option'))
 }
 
-function expectOptionFieldToBeClear(optionsInput) {
+function expectOptionFieldToBeClear(screen) {
+  const optionsInput = screen.getByLabelText('Options:')
   expect(optionsInput.value).toEqual('')
+}
+
+class NewGamePage {
+  constructor() {
+    this.store = makeStore()
+    this.screen = render(NewGame, {
+      global: {
+        provide: {
+          store: this.store
+        }
+      }
+    })
+  }
+
+  async addQuestion(quesstion) {
+    const questionInput = this.screen.getByLabelText('Question:')
+    await fireEvent.update(questionInput, quesstion)
+  }
+
+  expectOptionsOnScreen(expectedOptions) {
+    const options = this.screen.queryAllByTestId('option')
+    expect(options.map((o) => o.textContent)).toEqual(expectedOptions)
+  }
 }
