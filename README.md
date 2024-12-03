@@ -19,17 +19,18 @@ New Game page:
 - [x] Try test first approach
 - [x] Show options as they are added (on Add option button click, like list of tags)
 - [x] Clear input field after adding an option
-- [ ] HW: extract test step to higher level, name function as what it means to user, navigate through the test, read Page Object
+- [x] Extract test step to higher level, name function as what it means to user, navigate through the test, read Page Object
+- [x] Enable selecting one option as correct answer
+- [x] Enjoy
+- [ ] Create page object for Play Game page
 - [ ] Add possability to remove option
-- [ ] Enable selecting one option as correct answer
 - [ ] Implement form validation(fields are full field)
-- [ ] Enjoy
 
-
-
-Goals for Braves:
+And:
 - [ ] TypeScript
 - [ ] Connect New Game Page with Play Game
+
+Goals for Braves:
 - [ ] Database query and API calls 
 
 ## Tips 
