@@ -29,44 +29,12 @@ test('NewGame', async () => {
 
 test('PlayGame', async () => {
   const correctAnswer = 'yes'
-  const store = makeStore([
-    {
-      question: 'Is it first question?',
-      options: ['yes', 'no'],
-      answer: correctAnswer,
-      picked: ''
-    }
-  ])
-  const screen = render(PlayGame, {
-    global: {
-      provide: {
-        store: store
-      }
-    }
-  })
-  await selectAnswer(screen, correctAnswer)
+  const page = new PlayGamePage(correctAnswer)
 
-  await submitAnswers(screen)
-
-  expectAnswerIsCorrect(screen)
+  await page.selectAnswer(correctAnswer)
+  await page.submitAnswers()
+  page.expectAnswerIsCorrect()
 })
-
-function expectAnswerIsCorrect(screen) {
-  const rightAnswers = screen.getAllByText('correct')
-  expect(rightAnswers.length).toEqual(1)
-}
-
-async function submitAnswers(screen) {
-  const submitButton = screen.getByText('Submit')
-  expect(submitButton).toBeEnabled()
-
-  await fireEvent.click(submitButton)
-}
-
-async function selectAnswer(screen, answer) {
-  const question = screen.getByLabelText(answer)
-  await fireEvent.click(question)
-}
 
 async function clickAddOption(screen) {
   await fireEvent.click(screen.getByText('Add option'))
@@ -122,5 +90,42 @@ class NewGamePage {
 
   expectRedirectedToHomePage() {
     expect(window.location.hash).toBe('#/')
+  }
+}
+
+class PlayGamePage {
+  constructor(correctAnswer) {
+    this.store = makeStore([
+      {
+        question: 'Is it first question?',
+        options: ['yes', 'no'],
+        answer: correctAnswer,
+        picked: ''
+      }
+    ])
+    this.screen = render(PlayGame, {
+      global: {
+        provide: {
+          store: this.store
+        }
+      }
+    })
+  }
+
+  expectAnswerIsCorrect() {
+    const rightAnswers = this.screen.getAllByText('correct')
+    expect(rightAnswers.length).toEqual(1)
+  }
+
+  async submitAnswers() {
+    const submitButton = this.screen.getByText('Submit')
+    expect(submitButton).toBeEnabled()
+
+    await fireEvent.click(submitButton)
+  }
+
+  async selectAnswer(answer) {
+    const question = this.screen.getByLabelText(answer)
+    await fireEvent.click(question)
   }
 }
