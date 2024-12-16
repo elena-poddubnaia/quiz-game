@@ -6,28 +6,25 @@ import PlayGame from './PlayGame.vue'
 
 test('NewGame', async () => {
   const page = new NewGamePage()
-
   await page.addQuestion('My question?')
   page.expectOptionsOnScreen([])
 
-  await addOption(page.screen, 'first') //call objects method
-
-  await addOption(page.screen, 'second')
-
+  await page.addOption('first')
+  await page.addOption('second')
   page.expectOptionsOnScreen(['first', 'second'])
 
-  await addCorrectAnswer(page.screen, 'first')
+  await page.addCorrectAnswer('first')
 
-  await clickAddQuestion(page.screen)
+  await page.clickAddQuestion()
 
-  expect(lastQuestion(page.store)).toEqual({
+  expect(page.lastQuestion(page.store)).toEqual({
     answer: 'first',
     options: ['first', 'second'],
     picked: '',
     question: 'My question?'
   })
 
-  expectRedirectedToHomePage()
+  page.expectRedirectedToHomePage()
 })
 
 test('PlayGame', async () => {
@@ -71,31 +68,6 @@ async function selectAnswer(screen, answer) {
   await fireEvent.click(question)
 }
 
-function expectRedirectedToHomePage() {
-  expect(window.location.hash).toBe('#/')
-}
-
-function lastQuestion(store) {
-  return store.state.questions.at(-1)
-}
-
-async function clickAddQuestion(screen) {
-  const button = screen.getByText('Add question')
-  await fireEvent.click(button)
-}
-
-async function addCorrectAnswer(screen, answer) {
-  const answerInput = screen.getByLabelText(answer)
-  await fireEvent.click(answerInput)
-}
-
-async function addOption(screen, option) {
-  const optionsInput = screen.getByLabelText('Options:')
-  await fireEvent.update(optionsInput, option)
-  await clickAddOption(screen)
-  expectOptionFieldToBeClear(screen)
-}
-
 async function clickAddOption(screen) {
   await fireEvent.click(screen.getByText('Add option'))
 }
@@ -125,5 +97,30 @@ class NewGamePage {
   expectOptionsOnScreen(expectedOptions) {
     const options = this.screen.queryAllByTestId('option')
     expect(options.map((o) => o.textContent)).toEqual(expectedOptions)
+  }
+
+  async addOption(option) {
+    const optionsInput = this.screen.getByLabelText('Options:')
+    await fireEvent.update(optionsInput, option)
+    await clickAddOption(this.screen)
+    expectOptionFieldToBeClear(this.screen)
+  }
+
+  async addCorrectAnswer(answer) {
+    const answerInput = this.screen.getByLabelText(answer)
+    await fireEvent.click(answerInput)
+  }
+
+  async clickAddQuestion() {
+    const button = this.screen.getByText('Add question')
+    await fireEvent.click(button)
+  }
+
+  lastQuestion(store) {
+    return store.state.questions.at(-1)
+  }
+
+  expectRedirectedToHomePage() {
+    expect(window.location.hash).toBe('#/')
   }
 }
