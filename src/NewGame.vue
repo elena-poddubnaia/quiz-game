@@ -36,10 +36,16 @@ const addOption = () => {
   <button @click="addOption">Add option</button>
   <br />
 
-  <label v-for="option in options" :key="option" data-testid="option">
+  <label v-for="option in options" :key="option" data-testid="option" class="option-label">
     <input type="radio" v-model="answer" :value="option" />{{ option }}
   </label>
 
   <br />
   <button @click="handleOnClick">Add question</button>
 </template>
+
+<style>
+.option-label {
+  display: block;
+}
+</style>
