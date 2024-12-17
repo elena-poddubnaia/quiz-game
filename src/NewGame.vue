@@ -22,6 +22,10 @@ const addOption = () => {
   options.value.push(option.value)
   option.value = ''
 }
+
+const removeOption = (option) => {
+  options.value = options.value.filter((o) => o !== option)
+}
 </script>
 
 <template>
@@ -36,9 +40,12 @@ const addOption = () => {
   <button @click="addOption">Add option</button>
   <br />
 
-  <label v-for="option in options" :key="option" data-testid="option" class="option-label">
-    <input type="radio" v-model="answer" :value="option" />{{ option }}
-  </label>
+  <div v-for="option in options" :key="option" data-testid="option">
+    <label class="option-label">
+      <input type="radio" v-model="answer" :value="option" />{{ option }}
+    </label>
+    <button @click="removeOption(option)"></button>
+  </div>
 
   <br />
   <button @click="handleOnClick">Add question</button>

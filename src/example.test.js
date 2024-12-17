@@ -27,6 +27,17 @@ test('NewGame', async () => {
   page.expectRedirectedToHomePage()
 })
 
+test('NewGame remove option', async () => {
+  const page = new NewGamePage()
+  page.expectOptionsOnScreen([])
+
+  await page.addOption('first')
+  page.expectOptionsOnScreen(['first'])
+
+  await page.removeOption('first')
+  page.expectOptionsOnScreen([])
+})
+
 test('PlayGame', async () => {
   const correctAnswer = 'yes'
   const page = new PlayGamePage(correctAnswer)
@@ -72,6 +83,12 @@ class NewGamePage {
     await fireEvent.update(optionsInput, option)
     await clickAddOption(this.screen)
     expectOptionFieldToBeClear(this.screen)
+  }
+
+  async removeOption(option) {
+    const optionElement = this.screen.getByTestId('option')
+    const button = optionElement.querySelector('button')
+    await fireEvent.click(button)
   }
 
   async addCorrectAnswer(answer) {
