@@ -32,10 +32,11 @@ test('NewGame remove option', async () => {
   page.expectOptionsOnScreen([])
 
   await page.addOption('first')
-  page.expectOptionsOnScreen(['first'])
+  await page.addOption('second')
+  page.expectOptionsOnScreen(['first', 'second'])
 
-  await page.removeOption('first')
-  page.expectOptionsOnScreen([])
+  await page.removeOption('second')
+  page.expectOptionsOnScreen(['first'])
 })
 
 test('PlayGame', async () => {
@@ -74,7 +75,7 @@ class NewGamePage {
   }
 
   expectOptionsOnScreen(expectedOptions) {
-    const options = this.screen.queryAllByTestId('option')
+    const options = this.screen.queryAllByTestId(/^option-/)
     expect(options.map((o) => o.textContent)).toEqual(expectedOptions)
   }
 
@@ -86,7 +87,7 @@ class NewGamePage {
   }
 
   async removeOption(option) {
-    const optionElement = this.screen.getByTestId('option')
+    const optionElement = this.screen.getByTestId('option-' + option)
     const button = optionElement.querySelector('button')
     await fireEvent.click(button)
   }
