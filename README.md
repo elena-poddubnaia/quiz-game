@@ -38,7 +38,7 @@ Goals for Braves:
 
 Ideas to discuss:
 - Let's change vuex to pinia just for fun and comparison. 
-- I found design that looks fancy, let's steal it and make our UI pretty (https://scrimba.com/quizzical-prj0b1088f6).
+- I found [design](https://www.figma.com/design/E9S5iPcm10f0RIHK8mCqKL/Quizzical-App?node-id=0-1&p=f&t=NbwqqvPdQcubO1K7-0) that looks fancy, let's take it and make our UI pretty.
 - Score count.
 
 
