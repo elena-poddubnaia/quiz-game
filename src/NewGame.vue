@@ -41,10 +41,10 @@ const removeOption = (option) => {
   <br />
 
   <div v-for="option in options" :key="option" :data-testid="`option-${option}`">
-    <label class="option-label">
+    <label class="option-label" :data-testid="`option-label-${option}`">
       <input type="radio" v-model="answer" :value="option" />{{ option }}
     </label>
-    <button @click="removeOption(option)"></button>
+    <button @click="removeOption(option)">X</button>
   </div>
 
   <br />

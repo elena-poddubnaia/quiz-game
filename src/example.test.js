@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { render, fireEvent } from '@testing-library/vue'
+import { render, fireEvent, getByText } from '@testing-library/vue'
 import { makeStore } from '@/store'
 import NewGame from '@/NewGame.vue'
 import PlayGame from './PlayGame.vue'
@@ -75,8 +75,8 @@ class NewGamePage {
   }
 
   expectOptionsOnScreen(expectedOptions) {
-    const options = this.screen.queryAllByTestId(/^option-/)
-    expect(options.map((o) => o.textContent)).toEqual(expectedOptions)
+    const optionLabels = this.screen.queryAllByTestId(/^option-label-/)
+    expect(optionLabels.map((o) => o.textContent)).toEqual(expectedOptions)
   }
 
   async addOption(option) {
@@ -88,7 +88,7 @@ class NewGamePage {
 
   async removeOption(option) {
     const optionElement = this.screen.getByTestId('option-' + option)
-    const button = optionElement.querySelector('button')
+    const button = getByText(optionElement, 'X')
     await fireEvent.click(button)
   }
 
