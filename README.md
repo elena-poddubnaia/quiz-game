@@ -34,7 +34,13 @@ New Game page:
 - [ ] Connect New Game Page with Play Game
 
 Goals for Braves:
-- [ ] Database query and API calls 
+- [ ] Database query and API calls
+
+Ideas to discuss:
+- Let's change vuex to pinia just for fun and comparison. 
+- I found design that looks fancy, let's steal it and make our UI pretty (https://scrimba.com/quizzical-prj0b1088f6).
+- Score count.
+
 
 ## Tips 
 - After adding new code, first think about what you expect to happen. Then, open the browser and check if everything works as you expected (or not). Same with test run.
