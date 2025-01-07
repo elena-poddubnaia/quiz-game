@@ -8,7 +8,8 @@ const option = ref('')
 const answer = ref('')
 const options = ref<string[]>([])
 
-const handleOnClick = () => {
+const handleOnClick = (e: any) => {
+  e.preventDefault()
   store.commit('addQuestion', {
     question,
     options,
@@ -30,25 +31,27 @@ const removeOption = (option: string): void => {
 
 <template>
   New Game!
-  <label for="question_input">Question:</label>
-  <input id="question_input" v-model="question" />
-  <br />
+  <form @submit="handleOnClick">
+    <label for="question_input">Question:</label>
+    <input id="question_input" v-model="question" />
+    <br />
 
-  <label for="options_input">Options:</label>
-  <input id="options_input" v-model="option" />
+    <label for="options_input">Options:</label>
+    <input id="options_input" v-model="option" />
 
-  <button @click="addOption">Add option</button>
-  <br />
+    <button @click="addOption">Add option</button>
+    <br />
 
-  <div v-for="option in options" :key="option" :data-testid="`option-${option}`">
-    <label class="option-label" :data-testid="`option-label-${option}`">
-      <input type="radio" v-model="answer" :value="option" />{{ option }}
-    </label>
-    <button @click="removeOption(option)">X</button>
-  </div>
+    <div v-for="option in options" :key="option" :data-testid="`option-${option}`">
+      <label class="option-label" :data-testid="`option-label-${option}`">
+        <input type="radio" v-model="answer" :value="option" />{{ option }}
+      </label>
+      <button @click="removeOption(option)">X</button>
+    </div>
 
-  <br />
-  <button @click="handleOnClick">Add question</button>
+    <br />
+    <button type="submit">Add question</button>
+  </form>
 </template>
 
 <style>
