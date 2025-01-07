@@ -1,8 +1,9 @@
 import { test, expect } from 'vitest'
-import { render, fireEvent, getByText } from '@testing-library/vue'
-import { makeStore } from '@/store'
-import NewGame from '@/NewGame.vue'
+import { render, fireEvent, getByText, type RenderResult } from '@testing-library/vue'
+import { makeStore, type Questions } from './store'
+import NewGame from './NewGame.vue'
 import PlayGame from './PlayGame.vue'
+import type { Store } from 'vuex'
 
 test('NewGame', async () => {
   const page = new NewGamePage()
@@ -17,7 +18,7 @@ test('NewGame', async () => {
 
   await page.clickAddQuestion()
 
-  expect(page.lastQuestion(page.store)).toEqual({
+  expect(page.lastQuestion()).toEqual({
     answer: 'first',
     options: ['first', 'second'],
     picked: '',
@@ -48,16 +49,18 @@ test('PlayGame', async () => {
   page.expectAnswerIsCorrect()
 })
 
-async function clickAddOption(screen) {
+async function clickAddOption(screen: RenderResult) {
   await fireEvent.click(screen.getByText('Add option'))
 }
 
-function expectOptionFieldToBeClear(screen) {
-  const optionsInput = screen.getByLabelText('Options:')
+function expectOptionFieldToBeClear(screen: RenderResult) {
+  const optionsInput: any = screen.getByLabelText('Options:')
   expect(optionsInput.value).toEqual('')
 }
 
 class NewGamePage {
+  screen: RenderResult
+  store: Store<{ questions: Questions }>
   constructor() {
     this.store = makeStore()
     this.screen = render(NewGame, {
@@ -69,30 +72,30 @@ class NewGamePage {
     })
   }
 
-  async addQuestion(quesstion) {
+  async addQuestion(quesstion: string) {
     const questionInput = this.screen.getByLabelText('Question:')
     await fireEvent.update(questionInput, quesstion)
   }
 
-  expectOptionsOnScreen(expectedOptions) {
+  expectOptionsOnScreen(expectedOptions: string[]) {
     const optionLabels = this.screen.queryAllByTestId(/^option-label-/)
     expect(optionLabels.map((o) => o.textContent)).toEqual(expectedOptions)
   }
 
-  async addOption(option) {
+  async addOption(option: string) {
     const optionsInput = this.screen.getByLabelText('Options:')
     await fireEvent.update(optionsInput, option)
     await clickAddOption(this.screen)
     expectOptionFieldToBeClear(this.screen)
   }
 
-  async removeOption(option) {
+  async removeOption(option: string) {
     const optionElement = this.screen.getByTestId('option-' + option)
     const button = getByText(optionElement, 'X')
     await fireEvent.click(button)
   }
 
-  async addCorrectAnswer(answer) {
+  async addCorrectAnswer(answer: string) {
     const answerInput = this.screen.getByLabelText(answer)
     await fireEvent.click(answerInput)
   }
@@ -102,8 +105,8 @@ class NewGamePage {
     await fireEvent.click(button)
   }
 
-  lastQuestion(store) {
-    return store.state.questions.at(-1)
+  lastQuestion() {
+    return this.store.state.questions.at(-1)
   }
 
   expectRedirectedToHomePage() {
@@ -112,7 +115,9 @@ class NewGamePage {
 }
 
 class PlayGamePage {
-  constructor(correctAnswer) {
+  screen: RenderResult
+  store: Store<{ questions: Questions }>
+  constructor(correctAnswer: string) {
     this.store = makeStore([
       {
         question: 'Is it first question?',
@@ -136,13 +141,13 @@ class PlayGamePage {
   }
 
   async submitAnswers() {
-    const submitButton = this.screen.getByText('Submit')
+    const submitButton: any = this.screen.getByText('Submit')
     expect(submitButton).toBeEnabled()
 
     await fireEvent.click(submitButton)
   }
 
-  async selectAnswer(answer) {
+  async selectAnswer(answer: string) {
     const question = this.screen.getByLabelText(answer)
     await fireEvent.click(question)
   }

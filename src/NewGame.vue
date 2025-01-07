@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 
@@ -6,7 +6,7 @@ const store = useStore()
 const question = ref('')
 const option = ref('')
 const answer = ref('')
-const options = ref([])
+const options = ref<string[]>([])
 
 const handleOnClick = () => {
   store.commit('addQuestion', {
@@ -18,12 +18,12 @@ const handleOnClick = () => {
   window.location.hash = '#/'
 }
 
-const addOption = () => {
+const addOption = (): void => {
   options.value.push(option.value)
   option.value = ''
 }
 
-const removeOption = (option) => {
+const removeOption = (option: string): void => {
   options.value = options.value.filter((o) => o !== option)
 }
 </script>

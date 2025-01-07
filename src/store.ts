@@ -1,8 +1,18 @@
-import { createStore } from 'vuex'
+import { createStore, Store } from 'vuex'
 
-export const hasRightAnswer = (question) => question.picked === question.answer
+export type Question = {
+  question: string
+  options: string[]
+  answer: string
+  picked: string | null
+  hasRightAnswer?: string
+}
 
-export const makeStore = (questions = []) =>
+export type Questions = Question[]
+
+export const hasRightAnswer = (question: Question) => question.picked === question.answer
+
+export const makeStore = (questions: Questions = []) =>
   createStore({
     state() {
       return {
@@ -24,7 +34,7 @@ export const makeStore = (questions = []) =>
     }
   })
 
-const defaultQuestions = [
+const defaultQuestions: Questions = [
   {
     question: 'Is it first question?',
     options: ['yes', 'no'],
@@ -45,4 +55,4 @@ const defaultQuestions = [
   }
 ]
 
-export const store = makeStore(defaultQuestions)
+export const store: Store<{ questions: Questions }> = makeStore(defaultQuestions)

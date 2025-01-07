@@ -1,6 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
+import type { Questions } from './store'
 
 const store = useStore()
 
@@ -10,7 +11,7 @@ function onSubmit() {
   showResults.value = true
 }
 
-const questions = computed(() => store.getters.questions2)
+const questions = computed<Questions>(() => store.getters.questions2)
 </script>
 
 <template>
