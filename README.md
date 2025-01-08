@@ -28,8 +28,7 @@ New Game page:
 - [x] Add possability to remove option ( with TDD from now on for all future features)
 
 #### 2025
-- [ ] HW check good practice from twill tests (what ppl use instead findByTestId)
-- [ ] HW TypeScript
+- [x] TypeScript
 - [ ] Implement form validation (check that fields are full field)
 - [ ] Connect New Game Page with Play Game
 
@@ -37,9 +36,8 @@ Goals for Braves:
 - [ ] Database query and API calls
 
 Ideas to discuss:
-- Let's change vuex to pinia just for fun and comparison. 
-- I found [design](https://www.figma.com/design/E9S5iPcm10f0RIHK8mCqKL/Quizzical-App?node-id=0-1&p=f&t=NbwqqvPdQcubO1K7-0) that looks fancy, let's take it and make our UI pretty.
-- Score count.
+- Let's change vuex to pinia
+- Score count
 
 
 ## Tips 
