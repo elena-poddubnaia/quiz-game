@@ -16,7 +16,7 @@ test('NewGame', async () => {
 
   await page.addCorrectAnswer('first')
 
-  await page.clickAddQuestion()
+  await page.submit()
 
   expect(page.lastQuestion()).toEqual({
     answer: 'first',
@@ -38,6 +38,15 @@ test('NewGame remove option', async () => {
 
   await page.removeOption('second')
   page.expectOptionsOnScreen(['first'])
+})
+
+test('NewGame remove option', async () => {
+  const page = new NewGamePage()
+
+  await page.addOption('first')
+  page.expectOptionsOnScreen(['first'])
+
+  await page.submit() // install lib https://github.com/logaretm/vee-validate, use for one field required, write tests for validation, think about what kind of test
 })
 
 test('PlayGame', async () => {
@@ -100,7 +109,7 @@ class NewGamePage {
     await fireEvent.click(answerInput)
   }
 
-  async clickAddQuestion() {
+  async submit() {
     const button = this.screen.getByText('Add question')
     await fireEvent.click(button)
   }

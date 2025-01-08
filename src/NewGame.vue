@@ -33,7 +33,7 @@ const removeOption = (option: string): void => {
   New Game!
   <form @submit="handleOnClick">
     <label for="question_input">Question:</label>
-    <input id="question_input" v-model="question" />
+    <input id="question_input" v-model="question" required />
     <br />
 
     <label for="options_input">Options:</label>
