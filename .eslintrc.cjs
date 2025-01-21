@@ -11,5 +11,6 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser'
-  }
+  },
+  ignores: ['.config/*']
 }
