@@ -29,16 +29,14 @@ New Game page:
 
 #### 2025
 - [x] TypeScript
-- [ ] Implement form validation (check that fields are full field)
 - [x] Try vee-validation and get disappointed with js dom 
-- [x] PlayWright 
+- [x] PlayWright
+- [ ] Form validation 
 - [ ] Connect New Game Page with Play Game
 
 Goals for Braves:
-- [ ] Database query and API calls
-
-Ideas to discuss:
-- Change vuex to pinia?
+- Database query and API calls?
+- Pinia?
 - Score count?
 
 
